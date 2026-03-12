@@ -1,0 +1,31 @@
+# =========================
+# Python y Compilados
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# =========================
+# Entornos Virtuales
+# =========================
+venv/
+.venv/
+env/
+
+# =========================
+# Configuraciones del IDE
+# =========================
+.idea/
+*.iml
+
+# =========================
+# Logs y Archivos Dinámicos del Proyecto
+# =========================
+*.log
+routing.log
+
+# =========================
+# Sistema Operativo
+# =========================
+.DS_Store
+Thumbs.db
