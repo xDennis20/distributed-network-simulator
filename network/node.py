@@ -31,4 +31,10 @@ class Node:
     def agregar_paquete(self, paquete: Paquete) -> None:
         heapq.heappush(self.cola_entrada,(paquete.prioridad,paquete.id,paquete))
 
-nodo = Node("A")
+    def procesar_paquete(self):
+        paquete_procesar = heapq.heappop(self.cola_entrada)
+        paquete = paquete_procesar[2]
+        if paquete.destino == self.nombre:
+            pass
+        else:
+            self.cola_salida.append((paquete,self.tabla_enrutamiento.get(paquete.destino)))
