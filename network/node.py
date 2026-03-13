@@ -43,3 +43,6 @@ class Node:
 
     def mandar_paquete(self):
         return self.cola_salida.popleft()
+
+    def __repr__(self):
+        return f"{type(self).__name__}(nombre={self.nombre}, paquetes= {len(self.cola_entrada)}"
