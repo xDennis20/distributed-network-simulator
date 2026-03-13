@@ -8,6 +8,7 @@ class Node:
         self.nombre = nombre
         self.cola_entrada: list = []
         self.cola_salida: deque = deque()
+        self.vecinos: list[str] = []
         self.tabla_enrutamiento: dict[str,str] = {}
         self._estado: str = "activo"
 
@@ -31,7 +32,7 @@ class Node:
     def agregar_paquete(self, paquete: Paquete) -> None:
         heapq.heappush(self.cola_entrada,(paquete.prioridad,paquete.id,paquete))
 
-    def procesar_paquete(self):
+    def procesar_paquete(self) -> None:
         paquete_procesar = heapq.heappop(self.cola_entrada)
         paquete = paquete_procesar[2]
         if paquete.destino == self.nombre:
@@ -41,8 +42,8 @@ class Node:
             if siguiente_salto is not None:
                 self.cola_salida.append((paquete, siguiente_salto))
 
-    def mandar_paquete(self):
+    def mandar_paquete(self) -> tuple:
         return self.cola_salida.popleft()
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{type(self).__name__}(nombre={self.nombre}, paquetes= {len(self.cola_entrada)}"
