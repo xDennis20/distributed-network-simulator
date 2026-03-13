@@ -37,4 +37,9 @@ class Node:
         if paquete.destino == self.nombre:
             pass
         else:
-            self.cola_salida.append((paquete,self.tabla_enrutamiento.get(paquete.destino)))
+            siguiente_salto = self.tabla_enrutamiento.get(paquete.destino)
+            if siguiente_salto is not None:
+                self.cola_salida.append((paquete, siguiente_salto))
+
+    def mandar_paquete(self):
+        return self.cola_salida.popleft()
