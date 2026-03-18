@@ -1,5 +1,6 @@
 from collections import deque
 from packets.models import Paquete
+from typing import Optional
 import heapq
 
 class Node:
@@ -9,7 +10,7 @@ class Node:
         self.cola_entrada: list = []
         self.cola_salida: deque = deque()
         self.vecinos: list[str] = []
-        self.tabla_enrutamiento: dict[str,str] = {}
+        self.tabla_enrutamiento: dict[str,Optional[str]] = {}
         self._estado: str = "activo"
 
     @property

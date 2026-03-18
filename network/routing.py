@@ -1,6 +1,5 @@
 from network.node import Node
 from strategy.bfs import recorrer_bfs
-from  persistence.datos_json import cargar_json
 
 class Grafo:
     def __init__(self):

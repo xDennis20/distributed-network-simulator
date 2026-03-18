@@ -13,9 +13,12 @@ def recorrer_bfs(inicio: Node,nodos: dict):
             if vecino not in visitados:
                 visitados.add(vecino)
                 vecino = nodos.get(vecino)
-                if nodo_actual.nombre != inicio.nombre:
-                    nodo_origen.tabla_enrutamiento[vecino.nombre] = paso_anterior.nombre
-                    cola.append((vecino, paso_anterior))
+                if vecino.estado == "desactivado":
+                    nodo_origen.tabla_enrutamiento[vecino.nombre] = None
                 else:
-                    nodo_origen.tabla_enrutamiento[vecino.nombre] = vecino.nombre
-                    cola.append((vecino, vecino))
+                    if nodo_actual.nombre != inicio.nombre:
+                        nodo_origen.tabla_enrutamiento[vecino.nombre] = paso_anterior.nombre
+                        cola.append((vecino, paso_anterior))
+                    else:
+                        nodo_origen.tabla_enrutamiento[vecino.nombre] = vecino.nombre
+                        cola.append((vecino, vecino))
