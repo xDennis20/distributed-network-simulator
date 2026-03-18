@@ -38,6 +38,7 @@ class Node:
             return "VACIO"
         paquete_procesar = heapq.heappop(self.cola_entrada)
         paquete = paquete_procesar[2]
+        paquete.nodos_recorridos.append(self.nombre)
         if paquete.destino == self.nombre:
             return "ENTREGADO"
         if self.tabla_enrutamiento.get(paquete.destino) is None:
@@ -48,7 +49,7 @@ class Node:
                 self.cola_salida.append((paquete, siguiente_salto))
             return "ENRUTADO"
 
-    def mandar_paquete(self) -> tuple:
+    def mandar_paquete(self) -> tuple[Paquete,str]:
         return self.cola_salida.popleft()
 
     def __repr__(self) -> str:
