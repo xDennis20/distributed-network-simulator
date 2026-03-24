@@ -31,23 +31,23 @@ class Node:
         return True
 
     def agregar_paquete(self, paquete: Paquete) -> None:
-        heapq.heappush(self.cola_entrada,(paquete.prioridad,paquete.id,paquete))
+         heapq.heappush(self.cola_entrada,(paquete.prioridad,paquete.id,paquete))
 
     def procesar_paquete(self) -> str:
         if not self.cola_entrada:
-            return "VACIO"
+            return "Vacio"
         paquete_procesar = heapq.heappop(self.cola_entrada)
         paquete = paquete_procesar[2]
         paquete.nodos_recorridos.append(self.nombre)
         if paquete.destino == self.nombre:
-            return "ENTREGADO"
+            return f"Paquete {paquete.id} Entregado a {self.nombre}"
         if self.tabla_enrutamiento.get(paquete.destino) is None:
-            return "DESCARTADO"
+            return f"Paquete {paquete.id} Descartado de la red"
         else:
             siguiente_salto = self.tabla_enrutamiento.get(paquete.destino)
             if siguiente_salto is not None:
                 self.cola_salida.append((paquete, siguiente_salto))
-            return "ENRUTADO"
+            return f"Paquete {paquete.id} Enrutado al nodo {siguiente_salto}"
 
     def mandar_paquete(self) -> tuple[Paquete,str]:
         return self.cola_salida.popleft()

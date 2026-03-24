@@ -17,13 +17,18 @@ class Grafo:
 
     def generador_ticks(self):
         while True:
+            eventos_ticks = []
+
             for nodo in self.nodos.values():
-                nodo.procesar_paquete()
+                estado = nodo.procesar_paquete()
+                if estado != "Vacio":
+                    eventos_ticks.append(estado)
+
             for nodo in self.nodos.values():
                 if len(nodo.cola_salida) > 0:
                     paquete = nodo.mandar_paquete()
                     self.pasar_paquete(paquete)
-            yield "Tick completado"
+            yield eventos_ticks
 
     def pasar_paquete(self, paquete: tuple[Paquete,str]):
         paquete, siguiente_salto = paquete

@@ -3,6 +3,7 @@ from network.routing import inicializar_enrutadores
 from persistence.datos_json import cargar_json
 from packets.models import Paquete
 from datetime import datetime
+from collections import deque
 import re
 
 grafo = Grafo()
@@ -13,8 +14,11 @@ patron_prender = r"(Prender?|Encender)\s+(Nodo)\s+([a-z]{1})"
 patron_registrar = r"(Registrar|Agregar)\s+(paquetes?)"
 patron_ticks = r"(Simular|Dar)\s+([0-9]+)\s+(pasos?)"
 patron_salir = r"(Salir)\s*"
+ticks = grafo.generador_ticks()
+inicializar_enrutadores(grafo.nodos)
 
 def iniciar_cli():
+    paquetes: deque[Paquete] = deque()
     salir = False
     while not salir:
         comando = input("-> ")
@@ -52,6 +56,7 @@ def iniciar_cli():
             tiempo_evento = datetime.now()
             paquete = Paquete(origen,destino,contenido,prioridad,tiempo_evento)
             nodo_origen.agregar_paquete(paquete)
+            paquetes.appendleft(paquete)
             print(f"✔ Paquete {paquete.id} encolado en el nodo {paquete.origen}")
 
         elif dato_nodo := re.search(patron_apagar,comando,re.IGNORECASE):
@@ -80,8 +85,21 @@ def iniciar_cli():
                 print("EL nodo a prender no existe en la red")
                 continue
 
-        elif re.search(patron_ticks,comando,re.IGNORECASE):
-            print("Simulando")
+        elif dato_tick := re.search(patron_ticks,comando,re.IGNORECASE):
+            for n in range(int(dato_tick[2])):
+                eventos = (next(ticks))
+                print(f"\n--- ⏱️ TICK {n + 1} ---")
+
+                if not eventos:
+                    print("No hay paquetes registrados")
+                    break
+                else:
+                    evento = "\n".join(eventos)
+                    print(evento)
+            for paquete in paquetes:
+                recorrido = f"📦 Paquete #{paquete.id}. " + "->".join(paquete.nodos_recorridos)
+                print(recorrido)
+
         elif re.search(patron_salir,comando,re.IGNORECASE):
             print("Saliendo del sistema...")
             salir = True
