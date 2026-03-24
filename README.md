@@ -13,7 +13,7 @@ Resuelve el problema de encontrar la ruta más eficiente para el envío de infor
 ## 🛠️ Stack Tecnológico
 * **Lenguaje:** Python 3.10+
 * **Estructuras de Datos:** Grafos, Colas de Prioridad (Heap), Deques, Diccionarios.
-* **Patrones:** Single Responsibility Principle (SRP), Inyección de Dependencias.
+* **Patrones:** Single Responsibility Principle (SRP)
 * **Librerías Nativas:** `collections`, `heapq`, `dataclasses`, `json`.
 
 ## 🧠 Arquitectura del Nodo
@@ -22,5 +22,33 @@ Cada dispositivo (Nodo) en la red está diseñado de forma independiente con:
 2. **Cola de Salida (Egress):** Cola FIFO para despachar los paquetes procesados.
 3. **Tabla de Enrutamiento:** Mapa local para decidir el siguiente salto óptimo.
 
-## 🚀 Cómo ejecutarlo
-(Aquí pondremos las instrucciones de la terminal cuando el código esté listo, por ejemplo: `python main.py`)
+## 💻 Ejemplo de Uso (CLI)
+El sistema cuenta con una interfaz de línea de comandos (CLI) interactiva para gestionar la red en tiempo real:
+
+```text
+-> Registrar paquete
+Origen: A
+Destino: D
+Contenido: Reporte Financiero
+Prioridad: 1
+✔ Paquete 1 encolado en el nodo A
+
+-> Simular 2 pasos
+--- ⏱️ TICK 1 ---
+Paquete 1 Enrutado al nodo B
+--- ⏱️ TICK 2 ---
+Paquete 1 Entregado a D
+```
+
+## 🚀 Cómo empezar (Quickstart)
+
+1. **Clonar el repositorio:**
+   ```bash
+   git clone [https://github.com/tu-usuario/simulador-redes.git](https://github.com/tu-usuario/simulador-redes.git)
+   cd simulador-redes
+   ```
+2. **Ejecutar el simulador:**
+No requiere dependencias externas. Solo necesitas Python 3.10 o superior
+    ```bash
+    python main.py
+    ```
