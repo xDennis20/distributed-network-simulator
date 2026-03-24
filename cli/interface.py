@@ -105,5 +105,3 @@ def iniciar_cli():
             salir = True
         else:
             print("Comando desconocido")
-
-iniciar_cli()
